@@ -389,6 +389,51 @@
   transform: translateY(-2px);
 }
 
+/* ===== Play Store Button ===== */
+
+.cs-btn-playstore {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 24px 10px 18px;
+  border-radius: 14px;
+  background: #000;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cs-btn-playstore:hover {
+  background: #1a1a1a;
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.cs-playstore-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1;
+}
+
+.cs-playstore-small {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.cs-playstore-big {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin-top: 2px;
+}
+
 /* ===== Footer (inline with content) ===== */
 
 .cs-footer-inline {
@@ -415,7 +460,8 @@
   }
 
   .cs-btn-primary,
-  .cs-btn-secondary {
+  .cs-btn-secondary,
+  .cs-btn-playstore {
     width: 100%;
     justify-content: center;
   }

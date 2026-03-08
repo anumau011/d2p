@@ -12,7 +12,7 @@ createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/policy" element={<PrivacyPolicy />} />
         </Routes>
       </BrowserRouter>
     </HelmetProvider>

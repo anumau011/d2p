@@ -121,14 +121,16 @@ export default function App() {
 
         {/* CTA / Links + Footer */}
         <div className="cs-actions">
-          <a href="mailto:support@drop2print.com" className="cs-btn-primary">
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-              <polyline points="22,6 12,13 2,6" />
+          <a href="https://play.google.com/store/apps/details?id=com.drop2print" target="_blank" rel="noopener noreferrer" className="cs-btn-playstore">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302-2.302 2.302-2.697-2.302 2.697-2.302zM5.864 3.469L16.8 9.802 14.5 12.104 5.864 3.469z"/>
             </svg>
-            Get Notified
+            <div className="cs-playstore-text">
+              <span className="cs-playstore-small">GET IT ON</span>
+              <span className="cs-playstore-big">Google Play</span>
+            </div>
           </a>
-          <Link to="/privacy-policy" className="cs-btn-secondary">
+          <Link to="/policy" className="cs-btn-secondary">
             Privacy Policy
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <polyline points="9 18 15 12 9 6" />
