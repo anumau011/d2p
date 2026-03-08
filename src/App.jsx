@@ -121,7 +121,7 @@ export default function App() {
 
         {/* CTA / Links + Footer */}
         <div className="cs-actions">
-          <a href="https://play.google.com/store/apps/details?id=com.drop2print" target="_blank" rel="noopener noreferrer" className="cs-btn-playstore">
+          <a href="https://play.google.com/store/apps/details?id=com.drop2print.app" target="_blank" rel="noopener noreferrer" className="cs-btn-playstore">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302-2.302 2.302-2.697-2.302 2.697-2.302zM5.864 3.469L16.8 9.802 14.5 12.104 5.864 3.469z"/>
             </svg>
