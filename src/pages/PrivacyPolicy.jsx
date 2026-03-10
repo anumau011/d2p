@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Helmet } from 'react-helmet-async';
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const policies = {
   privacy: {
@@ -297,7 +299,7 @@ export default function PrivacyPolicy() {
       transition: "all 0.2s",
     },
     hero: {
-      padding: "40px clamp(16px, 5vw, 80px) 32px",
+      padding: "100px clamp(16px, 5vw, 80px) 32px",
       maxWidth: 1100,
       margin: "0 auto",
     },
@@ -547,23 +549,12 @@ export default function PrivacyPolicy() {
         <meta property="og:title" content="Drop2Print – Privacy Policy & Terms" />
         <meta property="og:description" content="Learn how Drop2Print handles your data and the terms of using our printing service." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.drop2print.com/policy" />
+        <meta property="og:url" content="https://www.drop2print.com/privacy" />
         <meta property="og:image" content="https://www.drop2print.com/og-image.png" />
-        <link rel="canonical" href="https://www.drop2print.com/policy" />
+        <link rel="canonical" href="https://www.drop2print.com/privacy" />
       </Helmet>
 
-      {/* Navbar */}
-      <nav style={styles.navbar}>
-        <div style={styles.navInner}>
-          <div style={styles.logo}>
-            <div style={styles.logoMark}>D2P</div>
-            <span style={styles.logoText}>Drop2Print</span>
-          </div>
-          <button style={styles.themeBtn} onClick={() => setDark(!d)}>
-            {d ? <SunIcon /> : <MoonIcon />}
-          </button>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero */}
       <div style={styles.hero}>
@@ -681,13 +672,7 @@ export default function PrivacyPolicy() {
         </div>
       </div>
 
-      {/* Footer */}
-      <div style={{ padding: "0 clamp(16px, 5vw, 80px)" }}>
-        <div style={styles.footer}>
-          <span style={styles.footerText}>© 2026 Drop2Print. All rights reserved.</span>
-          <span style={styles.footerText}>Governed by the laws of India.</span>
-        </div>
-      </div>
+      <Footer />
     </div>
   );
 }
