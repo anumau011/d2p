@@ -346,7 +346,7 @@ function ConfirmView({ auth, onDeleted }) {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch(`${API_BASE_URL}/api/auth/delete-account`, {
+      const res = await fetch(`${API_BASE_URL}/auth/delete-account`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token: auth.token }),
@@ -511,16 +511,11 @@ function ConfirmView({ auth, onDeleted }) {
           </>
         )}
 
-        {/* phase: cancelled */}
+        {/* phase: cancelled — show delete button again, no restart message */}
         {phase === "cancelled" && (
-          <>
-            <p style={{ fontSize: "0.8125rem", color: "#8888a8", marginBottom: "0.75rem" }}>
-              Timer cancelled. Restart whenever you're ready.
-            </p>
-            <Btn variant="ghost" onClick={startTimer}>
-              Restart 5-second timer
-            </Btn>
-          </>
+          <Btn variant="danger" onClick={startTimer}>
+            Yes, I want to delete my account
+          </Btn>
         )}
 
         <ErrorBox message={error} />
