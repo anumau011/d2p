@@ -348,8 +348,10 @@ function ConfirmView({ auth, onDeleted }) {
     try {
       const res = await fetch(`${API_BASE_URL}/auth/delete-account`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token: auth.token }),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${auth.token}`,
+        },
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data?.message || "Delete failed. Please try again.");
