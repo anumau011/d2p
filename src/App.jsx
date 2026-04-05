@@ -150,11 +150,11 @@ import HowItWorks from './pages/HowItWorks.jsx'
 import FindShops from './pages/FindShops.jsx'
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx'
 import Contact from './pages/Contact.jsx'
-import Login from './pages/Login.jsx'
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home.jsx'
 import NotFound from './pages/NotFound.jsx'
+import DeleteAccount from './pages/DeleteAccount.jsx'
 
 
 export default function App() {
@@ -167,7 +167,7 @@ export default function App() {
           {/* <Route path="/shops" element={<FindShops />} /> */}
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/contact" element={<Contact />} />
-          {/* <Route path="/login" element={<Login />} /> */}
+          <Route path="/delete-account" element={<DeleteAccount />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

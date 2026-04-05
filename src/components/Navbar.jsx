@@ -7,6 +7,7 @@ const navLinks = [
   { to: "/how-it-works", label: "How It Works" },
   { to: "/privacy", label: "Privacy" },
   { to: "/contact", label: "Contact" },
+  { to: "/delete-account", label: "Delete Account" },
 ];
 
 export default function Navbar() {
