@@ -222,6 +222,7 @@ function Spinner() {
 function LoginView({ onSuccess }) {
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -252,17 +253,6 @@ function LoginView({ onSuccess }) {
   return (
     <Card>
       <SectionLabel>Step 1 — Verify it's you</SectionLabel>
-      <p
-        style={{
-          fontSize: "0.8125rem",
-          color: "#8888a8",
-          lineHeight: 1.6,
-          marginBottom: "1.25rem",
-        }}
-      >
-        We need to confirm your identity before making any changes. Enter the
-        mobile number and password linked to your account.
-      </p>
 
       <form onSubmit={handleSubmit}>
         <FieldGroup label="Mobile number">
@@ -277,14 +267,50 @@ function LoginView({ onSuccess }) {
         </FieldGroup>
 
         <FieldGroup label="Password">
-          <input
-            style={inputStyle}
-            type="password"
-            placeholder="Your account password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div style={{ position: "relative" }}>
+            <input
+              style={inputStyle}
+              type={showPassword ? "text" : "password"}
+              placeholder="Your account password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              style={{
+                position: "absolute",
+                right: 12,
+                top: "50%",
+                transform: "translateY(-50%)",
+                background: "none",
+                border: "none",
+                color: "#8888a8",
+                cursor: "pointer",
+                padding: 4,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              title={showPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword ? (
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 width="16px" height="800px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+<path fill="none" stroke="#ffffff" stroke-width="2" stroke-miterlimit="10" d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
+	S1,32,1,32z"/>
+<circle fill="none" stroke="#ffffff" stroke-width="2" stroke-miterlimit="10" cx="32" cy="32" r="7"/>
+<line fill="none" stroke="#ffffff" stroke-width="2" stroke-miterlimit="10" x1="9" y1="55" x2="55" y2="9"/>
+</svg>
+              ) : (
+<svg width="16px" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-eye">
+  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+</svg>
+              )}
+            </button>
+          </div>
         </FieldGroup>
 
         <ErrorBox message={error} />
@@ -311,11 +337,7 @@ function LoginView({ onSuccess }) {
 }
 
 const WARNINGS = [
-  "Your account and profile are permanently removed",
-  "All your past orders and print history are erased",
-  "Any saved addresses and preferences are lost",
-  "Pending orders may be cancelled without a refund",
-  "You cannot recover this account once deleted",
+  "Your all data will be permanently deleted and cannot be recovered."
 ];
 
 function ConfirmView({ auth, onDeleted }) {
@@ -389,7 +411,6 @@ function ConfirmView({ auth, onDeleted }) {
         {[
           ["Name", auth.user?.name],
           ["Mobile", auth.user?.mobileNumber],
-          ["User ID", auth.user?.userId],
         ].map(([key, val]) => (
           <div key={key} style={{ display: "flex", gap: "0.75rem", marginBottom: "0.35rem" }}>
             <span style={{ fontSize: "0.78rem", color: "#8888a8", minWidth: 60 }}>{key}</span>
