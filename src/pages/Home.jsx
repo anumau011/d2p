@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import {
@@ -13,6 +14,8 @@ import {
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+
+const PARTNER_APP_CONFIG_URL = "https://www.jsonkeeper.com/b/R3FB8";
 
 const features = [
   {
@@ -55,6 +58,53 @@ const steps = [
 ];
 
 export default function Home() {
+  const [partnerApp, setPartnerApp] = useState({
+    loading: true,
+    version: null,
+    apkUrl: "",
+    error: false,
+  });
+
+  useEffect(() => {
+    let isActive = true;
+
+    const fetchPartnerAppConfig = async () => {
+      try {
+        const response = await fetch(PARTNER_APP_CONFIG_URL, { cache: "no-store" });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch partner app config");
+        }
+
+        const data = await response.json();
+        const version = Number(data?.version);
+        const apkUrl = typeof data?.apk_url === "string" ? data.apk_url : "";
+        const hasValidData = Number.isFinite(version) && version > 0 && apkUrl.length > 0;
+
+        if (!isActive) {
+          return;
+        }
+
+        if (!hasValidData) {
+          setPartnerApp({ loading: false, version: null, apkUrl: "", error: true });
+          return;
+        }
+
+        setPartnerApp({ loading: false, version, apkUrl, error: false });
+      } catch {
+        if (isActive) {
+          setPartnerApp({ loading: false, version: null, apkUrl: "", error: true });
+        }
+      }
+    };
+
+    fetchPartnerAppConfig();
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-gray-200 font-[Inter,-apple-system,BlinkMacSystemFont,sans-serif]">
       <Helmet>
@@ -82,10 +132,8 @@ export default function Home() {
           </div>
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6">
-            <span className="text-white">Print Documents</span>
-            <br />
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              From Anywhere
+              Print From Anywhere
             </span>
           </h1>
 
@@ -113,8 +161,37 @@ export default function Home() {
               How It Works
               <ChevronRight size={16} />
             </Link>
+            {partnerApp.loading ? (
+              <button
+                type="button"
+                disabled
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 border border-white/10 text-gray-400 font-semibold text-[15px] transition-all duration-200 cursor-not-allowed"
+              >
+                Checking Partner App...
+              </button>
+            ) : partnerApp.apkUrl ? (
+              <a
+                href={partnerApp.apkUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-6 py-3.5 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold text-[15px] no-underline shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5 transition-all duration-200"
+              >
+                Download Partner App (v{partnerApp.version})
+                <ArrowRight size={16} />
+              </a>
+            ) : (
+              <button
+                type="button"
+                disabled
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 border border-white/10 text-gray-400 font-semibold text-[15px] transition-all duration-200 cursor-not-allowed"
+                title={partnerApp.error ? "Partner app is unavailable right now" : "Partner app not available"}
+              >
+                Partner App Unavailable
+              </button>
+            )}
           </div>
         </div>
+        
       </section>
 
       {/* ===== HOW IT WORKS (mini) ===== */}
